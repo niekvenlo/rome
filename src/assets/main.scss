@@ -1,0 +1,200 @@
+// All colours are defined in hsl and in relation to eachother.
+// Lightness only depends on the system preference for light/dark mode.
+
+:root {
+  --hue: 0;
+  --lightness: 88%;
+  --darkness: calc(100% - var(--lightness));
+
+  --background-color: hsl(var(--hue), 40%, var(--lightness));
+  --alt-background-color: hsl(calc(180 + var(--hue)), 40%, var(--lightness));
+
+  --text-color: hsl(var(--hue), 70%, var(--darkness));
+  --alt-text-color: hsl(calc(180deg + var(--hue)), 70%, var(--darkness));
+
+  --link-color: hsl(calc(120 + var(--hue)), 100%, var(--darkness));
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --lightness: 12%;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--text-color);
+  background: var(--background-color);
+  background-image: linear-gradient(to right, var(--colorFrom), var(--colorTo));
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--link-color);
+  padding: 0.5em;
+  text-decoration: none;
+  transition: 0.2s;
+  &:hover {
+    background-color: var(--link-color);
+    color: var(--background-color);
+  }
+}
+
+a.router-link-exact-active {
+  color: inherit;
+  font-weight: 600;
+  font-size: 1.4em;
+  &:hover {
+    background-color: transparent;
+    cursor: default;
+  }
+}
+
+header {
+  background-color: var(--alt-background-color);
+  display: flex;
+  gap: 2em;
+  max-height: 100vh;
+  align-items: center;
+  margin-block-end: 2em;
+}
+header,
+main {
+  padding: 1em;
+}
+
+@media only screen and (max-width: 992px) {
+  header {
+    flex-direction: column;
+    gap: 0.5em;
+    align-items: flex-end;
+    margin-block-end: 0em;
+  }
+}
+
+.pill-list {
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  margin-inline: 0.5em;
+  margin-block-end: 0.5em;
+  span {
+    border-bottom: 0.1px var(--text-color) solid;
+    border-radius: 0.5em;
+    padding-inline: 1em;
+    font-weight: 500;
+    text-align: center;
+  }
+}
+
+.caroussel {
+  h2 {
+    font-size: 2em;
+    font-style: italic;
+    margin-block-start: 1.5em;
+    padding-block: 0.5em;
+    span {
+      font-weight: 200;
+    }
+  }
+  .cards {
+    display: flex;
+    flex-wrap: no-wrap;
+    overflow: scroll;
+    gap: 0.5em;
+  }
+}
+
+.show-card {
+  --primary-color: var(--text-color);
+  --secondary-color: var(--background-color);
+  border: 0.1em solid var(--secondary-color);
+  background-color: var(--alt-background-color);
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 250px;
+  min-width: 150px;
+  max-width: 150px;
+  padding: 0;
+  .gradient {
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0) 0%,
+      var(--secondary-color) 50%,
+      var(--secondary-color) 100%
+    );
+    color: var(--primary-color);
+    font-size: 1.5em;
+    padding: 0.1em;
+    padding-inline: 0.2em;
+    padding-block-end: 1em;
+    font-weight: 800;
+    text-shadow: var(--secondary-color) 0px 0px 5px;
+
+    .rating {
+      font-weight: 300;
+    }
+  }
+  &:hover,
+  &:focus,
+  &:active {
+    outline: none;
+    --primary-color: var(--background-color);
+    --secondary-color: var(--text-color);
+  }
+}
+
+.search-inputs {
+  display: flex;
+  gap: 0.4em;
+  input,
+  button {
+    background: var(--alt-background-color);
+    color: var(--alt-text-color);
+    padding-block: 1.2em;
+    padding-inline: 0.6em;
+    margin-block: 0.6em;
+    border: 1px solid var(--alt-text-color);
+  }
+  button {
+    cursor: pointer;
+  }
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+
+  font-weight: normal;
+}
